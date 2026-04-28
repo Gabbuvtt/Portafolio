@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
-
-const EMAIL = "mejiagabriel0715@gmail.com";
-const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent("Contacto desde tu portafolio")}`;
-const GITHUB_URL = "https://github.com/Gabbuvtt";
-const LINKEDIN_URL = "https://www.linkedin.com/";
+import {
+  CONTACT_EMAIL,
+  GITHUB_URL,
+  GMAIL_COMPOSE_URL,
+  LINKEDIN_URL,
+} from "@/lib/site-config";
 
 const Contact = () => {
   return (
@@ -26,7 +27,7 @@ const Contact = () => {
             y oportunidades en arquitectura, fullstack o datos/IA.
           </p>
           <p className="text-sm font-mono text-accent mb-10">
-            {EMAIL}
+            {CONTACT_EMAIL}
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
