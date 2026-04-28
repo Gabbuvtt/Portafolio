@@ -1,17 +1,17 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
+import bicloudImg from "@assets/image_1777346939960.png";
+import bolixImg from "@assets/photo_2026-04-27_23-31-39_1777347128192.jpg";
 
 type Project = {
   title: string;
   role: string;
   description: string;
   image: string;
+  imageFit?: "cover" | "contain";
   tags: string[];
   status: "Live" | "En desarrollo";
   liveUrl?: string;
-  repoUrl?: string;
   accent: "primary" | "accent";
 };
 
@@ -20,20 +20,24 @@ const projects: Project[] = [
     title: "BiCloud M",
     role: "Co-fundador · Arquitecto de Software",
     description:
-      "Plataforma SaaS e infraestructura cloud diseñada para escalar workloads de negocio. Arquitectura modular con APIs REST, control de acceso y aprovisionamiento automatizado de servicios.",
-    image: project1,
+      "Como Arquitecto de Software diseñé la plataforma SaaS e infraestructura cloud de BiCloud M. Definí la arquitectura modular, las APIs REST, el modelo de datos y el panel administrativo para gestionar tickets, usuarios y operaciones a escala.",
+    image: bicloudImg,
+    imageFit: "cover",
     tags: ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript", "Cloud"],
     status: "Live",
+    liveUrl: "https://iaim-beta-proyect.vercel.app/",
     accent: "primary",
   },
   {
     title: "Bolix",
     role: "Co-fundador · Analista de Datos / IA",
     description:
-      "Motor de analítica de datos y predicción estadística. Pipelines de procesamiento, modelos predictivos basados en NumPy y APIs para servir resultados en tiempo real a aplicaciones cliente.",
-    image: project2,
-    tags: ["Python", "NumPy", "FastAPI", "MySQL", "Estadística", "ML"],
-    status: "En desarrollo",
+      "Como Analista de Datos / IA construí en Bolix un motor de predicción estadística y analítica financiera: ingesta de fuentes (BCV, Binance), cálculo de tasas promedio en tiempo real y app móvil para consultar indicadores y brechas del mercado.",
+    image: bolixImg,
+    imageFit: "contain",
+    tags: ["Python", "NumPy", "FastAPI", "MySQL", "React Native", "Estadística"],
+    status: "Live",
+    liveUrl: "https://bolix.app",
     accent: "accent",
   },
 ];
@@ -58,7 +62,7 @@ const Projects = () => {
           {projects.map((p, i) => (
             <article
               key={p.title}
-              className="group relative rounded-2xl overflow-hidden border border-border bg-card/60 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 animate-fade-up"
+              className="group relative rounded-2xl overflow-hidden border border-border bg-card/60 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 animate-fade-up flex flex-col"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               <div className="aspect-video overflow-hidden bg-muted relative">
@@ -66,32 +70,20 @@ const Projects = () => {
                   src={p.image}
                   alt={p.title}
                   loading="lazy"
-                  width={1280}
-                  height={800}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className={`w-full h-full ${p.imageFit === "contain" ? "object-contain p-4" : "object-cover"} group-hover:scale-105 transition-transform duration-700`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent pointer-events-none" />
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-mono backdrop-blur-md bg-background/80 border border-border">
-                  <span
-                    className={
-                      p.status === "Live"
-                        ? "text-accent"
-                        : "text-primary"
-                    }
-                  >
-                    ● {p.status}
-                  </span>
+                  <span className="text-accent">● {p.status}</span>
                 </div>
               </div>
 
-              <div className="p-8">
-                <div className="flex items-baseline justify-between gap-3 mb-1">
-                  <h3 className="text-2xl font-bold">{p.title}</h3>
-                </div>
+              <div className="p-8 flex-1 flex flex-col">
+                <h3 className="text-2xl font-bold mb-1">{p.title}</h3>
                 <p className={`text-xs font-mono mb-4 ${p.accent === "primary" ? "text-primary" : "text-accent"}`}>
                   {p.role}
                 </p>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed flex-1">
                   {p.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -104,29 +96,16 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  {p.liveUrl && (
+                {p.liveUrl && (
+                  <div className="flex gap-3">
                     <Button size="sm" asChild>
                       <a href={p.liveUrl} target="_blank" rel="noreferrer">
                         <ExternalLink className="mr-2 h-3.5 w-3.5" />
-                        Ver demo
+                        Ver proyecto
                       </a>
                     </Button>
-                  )}
-                  {p.repoUrl && (
-                    <Button size="sm" variant="outline" asChild>
-                      <a href={p.repoUrl} target="_blank" rel="noreferrer">
-                        <Github className="mr-2 h-3.5 w-3.5" />
-                        Código
-                      </a>
-                    </Button>
-                  )}
-                  {!p.liveUrl && !p.repoUrl && (
-                    <span className="text-xs font-mono text-muted-foreground italic">
-                      Repositorio privado
-                    </span>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </article>
           ))}
