@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 const EMAIL = "mejiagabriel0715@gmail.com";
+const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent("Contacto desde tu portafolio")}`;
 const GITHUB_URL = "https://github.com/Gabbuvtt";
 const LINKEDIN_URL = "https://www.linkedin.com/";
 
@@ -30,7 +31,7 @@ const Contact = () => {
 
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" className="glow-primary" asChild>
-              <a href={`mailto:${EMAIL}`}>
+              <a href={GMAIL_COMPOSE_URL} target="_blank" rel="noreferrer">
                 <Mail className="mr-2 h-4 w-4" />
                 Envíame un email
               </a>
