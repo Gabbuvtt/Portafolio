@@ -5,49 +5,52 @@ import project2 from "@/assets/project-2.jpg";
 
 type Project = {
   title: string;
+  role: string;
   description: string;
   image: string;
   tags: string[];
   status: "Live" | "En desarrollo";
   liveUrl?: string;
   repoUrl?: string;
+  accent: "primary" | "accent";
 };
 
 const projects: Project[] = [
   {
-    title: "Aplicación 1",
+    title: "BiCloud M",
+    role: "Co-fundador · Arquitecto de Software",
     description:
-      "Mi primera aplicación desplegada. Una experiencia web completa enfocada en performance y usabilidad.",
+      "Plataforma SaaS e infraestructura cloud diseñada para escalar workloads de negocio. Arquitectura modular con APIs REST, control de acceso y aprovisionamiento automatizado de servicios.",
     image: project1,
-    tags: ["React", "TypeScript", "Tailwind"],
+    tags: ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript", "Cloud"],
     status: "Live",
-    liveUrl: "#",
-    repoUrl: "#",
+    accent: "primary",
   },
   {
-    title: "Aplicación 2",
+    title: "Bolix",
+    role: "Co-fundador · Analista de Datos / IA",
     description:
-      "Proyecto en desarrollo local, próximamente desplegado en Netlify. Explorando nuevas ideas y patrones.",
+      "Motor de analítica de datos y predicción estadística. Pipelines de procesamiento, modelos predictivos basados en NumPy y APIs para servir resultados en tiempo real a aplicaciones cliente.",
     image: project2,
-    tags: ["React", "Node.js", "Netlify"],
+    tags: ["Python", "NumPy", "FastAPI", "MySQL", "Estadística", "ML"],
     status: "En desarrollo",
-    repoUrl: "#",
+    accent: "accent",
   },
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 lg:py-32 relative">
+    <section id="projects" className="py-24 lg:py-32 relative scroll-mt-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <span className="text-sm uppercase tracking-widest text-primary font-medium">
-            Proyectos
+          <span className="text-sm uppercase tracking-widest text-primary font-mono font-medium">
+            // Proyectos
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold mt-3 mb-4">
-            Trabajos <span className="text-gradient">destacados</span>
+            Productos que <span className="text-gradient">co-fundé</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Una selección de las aplicaciones que he construido.
+            Iniciativas reales en las que diseño la arquitectura y construyo el stack de punta a punta.
           </p>
         </div>
 
@@ -67,12 +70,13 @@ const Projects = () => {
                   height={800}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md bg-background/80 border border-border">
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-mono backdrop-blur-md bg-background/80 border border-border">
                   <span
                     className={
                       p.status === "Live"
-                        ? "text-primary"
-                        : "text-accent"
+                        ? "text-accent"
+                        : "text-primary"
                     }
                   >
                     ● {p.status}
@@ -81,7 +85,12 @@ const Projects = () => {
               </div>
 
               <div className="p-8">
-                <h3 className="text-2xl font-bold mb-3">{p.title}</h3>
+                <div className="flex items-baseline justify-between gap-3 mb-1">
+                  <h3 className="text-2xl font-bold">{p.title}</h3>
+                </div>
+                <p className={`text-xs font-mono mb-4 ${p.accent === "primary" ? "text-primary" : "text-accent"}`}>
+                  {p.role}
+                </p>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {p.description}
                 </p>
@@ -89,7 +98,7 @@ const Projects = () => {
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground border border-border"
+                      className="px-2.5 py-1 text-[11px] font-mono rounded-md bg-secondary text-secondary-foreground border border-border"
                     >
                       {t}
                     </span>
@@ -111,6 +120,11 @@ const Projects = () => {
                         Código
                       </a>
                     </Button>
+                  )}
+                  {!p.liveUrl && !p.repoUrl && (
+                    <span className="text-xs font-mono text-muted-foreground italic">
+                      Repositorio privado
+                    </span>
                   )}
                 </div>
               </div>
