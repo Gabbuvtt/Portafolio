@@ -1,0 +1,13 @@
+# Replit-internal — no se sube a GitHub
+.canvas/
+.cache/
+.agents/
+.local/
+.upm/
+.config/
+.breakpoints
+.upm.lock
+
+# OS
+.DS_Store
+Thumbs.db

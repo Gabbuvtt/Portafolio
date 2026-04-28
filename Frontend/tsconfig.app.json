@@ -24,7 +24,7 @@
 
     "paths": {
       "@/*": ["./src/*"],
-      "@assets/*": ["../attached_assets/*"]
+      "@assets/*": ["./attached_assets/*"]
     }
   },
   "include": ["src"]
